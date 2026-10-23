@@ -11,6 +11,12 @@
   <!-- Custom Styles-->
   <link rel="stylesheet" href="./assets/css/style.css" />
   <title>Amira Abdulhafiz | Frontend Web Developer</title>
+  <style>
+    .resume-dropdown { display: none; list-style: none; margin: 0; padding: 0 0 4px 0; }
+    .resume-dropdown li a { font-size: 0.8em; padding-left: 36px; display: block; }
+    .resume-dropdown.open { display: block; }
+    #resume-toggle[aria-expanded="true"] i { color: #26a69a; }
+  </style>
 
 </head>
 
@@ -77,8 +83,12 @@
       <li class="bold">
        
       
-        <a aria-label="Download Amira's resume" href="./assets/resume/Amira Abdulhafiz - CV.pdf" download="Amira Abdulhafiz - CV.pdf"
-        class="waves-effect waves-dark teal-text"><i class="mdi-file-folder-open small"></i><span>Resume</span></a>
+        <a aria-label="Show resume download options" href="#!" id="resume-toggle"
+        class="waves-effect waves-dark teal-text" aria-haspopup="true" aria-expanded="false"><i class="mdi-file-folder-open small"></i><span>Resume</span></a>
+        <ul id="resume-options" class="resume-dropdown">
+          <li><a aria-label="Download resume in English" href="./assets/resume/Amira Abdulhafiz - CV.pdf" download="Amira Abdulhafiz - CV.pdf" class="waves-effect waves-dark teal-text">English (EN)</a></li>
+          <li><a aria-label="Download resume in Arabic" href="./assets/resume/Amira Abdulhafiz - CV AR.pdf" download="Amira Abdulhafiz - CV AR.pdf" class="waves-effect waves-dark teal-text">&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577; (AR)</a></li>
+        </ul>
       </li>
     </ul>
   </nav>
@@ -626,6 +636,15 @@ Bootstrap, Tailwind CSS, Bootstrap 5 </li>
         edge: "left", // Choose the horizontal origin
         closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
       })
+
+      // Resume: click to reveal EN/AR download options
+      $("#resume-toggle").on("click", function (e) {
+        e.preventDefault();
+        var $options = $("#resume-options");
+        var isOpen = $options.hasClass("open");
+        $options.toggleClass("open", !isOpen);
+        $(this).attr("aria-expanded", !isOpen);
+      });
     })
   </script>
 </body>
